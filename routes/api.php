@@ -1,5 +1,6 @@
 <?php
 
+use App\Program;
 use Illuminate\Http\Request;
 
 /*
@@ -16,9 +17,13 @@ use Illuminate\Http\Request;
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
-Route::apiResource('programs', 'ProgramController');
-Route::post('programs/{program}', 'ProgramController@show');
-Route::post('programs/create', 'ProgramController@store');
+Route::get('programs', function() {
+   return Program::all();
+});
+
+Route::get('programs/{id}', function($id) {
+    return Program::find($id);
+});
 
 
 Route::group(['middleware' => 'auth:api'], function() {
