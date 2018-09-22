@@ -1,5 +1,6 @@
 <?php
 
+use App\Course;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -15,23 +16,24 @@ class UsersTableSeeder extends Seeder
 
         User::truncate();
 
-        $faker = \Faker\Factory::create();
-
         $password = Hash::make('1111');
 
         User::create([
             'name' => 'Administrator',
             'email' => 'admin@test.com',
             'password' => $password,
+            'remember_token' => str_random(10),
         ]);
 
+        $courses = Course::all();
+
         // And now let's generate a few dozen users for our app:
-        for ($i = 0; $i < 200; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => $password,
-            ]);
-        }
+        factory(User::class, 200)->create();
+
+        User::all()->each(function ($user) use ($courses) {
+            $user->courses()->attach(
+              $courses->random(rand(5,10))->pluck('id')->toArray()
+            );
+        });
     }
 }
