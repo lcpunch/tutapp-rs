@@ -17,16 +17,15 @@ use Illuminate\Http\Request;
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
-Route::get('programs', function() {
-   return Program::all();
-});
-
-Route::get('programs/{id}', function($id) {
-    return Program::find($id);
-});
-
-
 Route::group(['middleware' => 'auth:api'], function() {
+
     Route::post('details', 'API\UserController@details');
+
+    // Program
+    Route::delete('programs/{id}', 'API\ProgramController@delete');
+    Route::get('programs', 'API\ProgramController@findAll');
+    Route::get('programs/{id}', 'API\ProgramController@find');
+    Route::post('programs/update', 'API\ProgramController@update');
+    Route::post('programs/save', 'API\ProgramController@store');
 });
 

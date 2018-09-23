@@ -16,8 +16,11 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->String('title');
-            $table->unsignedInteger('program_id');
+            $table->unsignedInteger('program_id')->nullable();
             $table->timestamps();
+            $table->foreign('program_id')
+                ->references('id')->on('programs')
+                ->onDelete('cascade');
         });
     }
 

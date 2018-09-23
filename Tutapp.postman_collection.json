@@ -171,51 +171,6 @@
 			"response": []
 		},
 		{
-			"name": "Update one program",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8000/api/programs/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"programs",
-						"1"
-					]
-				},
-				"description": "Get all programs"
-			},
-			"response": []
-		},
-		{
-			"name": "Create one program",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8000/api/programs/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"programs",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Delete one program",
 			"request": {
 				"method": "DELETE",

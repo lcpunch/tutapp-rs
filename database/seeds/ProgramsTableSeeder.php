@@ -12,8 +12,10 @@ class ProgramsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Program::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        factory(App\Course::class, 40)->create();
+        factory(Program::class, 40)->create();
     }
 }

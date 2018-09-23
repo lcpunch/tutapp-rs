@@ -12,7 +12,10 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Course::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
 
         factory(App\Course::class, 300)->create();
     }

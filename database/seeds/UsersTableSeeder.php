@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        User::truncate();
+        DB::table('users')->delete();
 
         $password = Hash::make('1111');
 
