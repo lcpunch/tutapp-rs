@@ -12,4 +12,12 @@ class Program extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function createProgram($data) {
+
+        $this->title = $data['title'];
+        $this->description = $data['description'];
+        $this->save();
+
+    }
 }

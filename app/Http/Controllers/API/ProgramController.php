@@ -45,8 +45,8 @@ class ProgramController extends Controller
         return "success";
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request, Program $program)
+    {
 //        $rules = array (
 //
 //            'api_token' => 'required',
@@ -67,10 +67,8 @@ class ProgramController extends Controller
 
 //            $user = JWTAuth::toUser($api_token);
 
-            $program = new Program();
-            $program->title = $request['title'];
-            $program->description = $request['description'];
-            $program->save();
+
+            $program->createProgram($request);
 
             return "success";
 
