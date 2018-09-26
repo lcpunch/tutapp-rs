@@ -33,7 +33,7 @@ class Course extends Model
         return Course::find($id);
     }
 
-    public function returnAllRegisters($id)
+    public function returnAllRegisters()
     {
         return Course::all();
     }
