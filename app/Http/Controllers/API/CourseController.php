@@ -7,36 +7,33 @@ use App\Program;
 use http\Exception;
 use Illuminate\Http\Request;
 
-class ProgramController extends Controller
+class CourseController extends Controller
 {
 
-    public function delete($id)
+    public function delete($id, Course $course)
     {
-        $program = Program::findOrFail($id);
-        if($program)
-            $program->delete();
-        else
-            return response()->json(error);
-        return response()->json(null);
+        return $course->deleteRegister($id);
     }
 
-    public function findAll()
+    public function findAll(Course $course)
     {
-        return Program::all();
+        return $course->returnAllRegisters();
     }
 
-    public function find($id)
+    public function find($id, Program $course)
     {
-        return Program::find($id);
+        return $course->returnRegister($id);
     }
 
     public function update(Request $request)
     {
         try {
-            $program  = Program::find($request['id']);
-            $program->title = $request['title'];
-            $program->description = $request['description'];
-            $program->save();
+
+            $program = Program::find($request['program_id']);
+            $course  = Course::find($request['id']);
+            $course->title = $request['title'];
+            $course->program()->associate($program);
+            $course->save();
 
         } catch (\Exception $e) {
             return "error";
@@ -45,7 +42,7 @@ class ProgramController extends Controller
         return "success";
     }
 
-    public function store(Request $request, Program $program)
+    public function store(Request $request, Program $course)
     {
 //        $rules = array (
 //
@@ -68,7 +65,10 @@ class ProgramController extends Controller
 //            $user = JWTAuth::toUser($api_token);
 
 
-            $program->createProgram($request);
+            $program = Program::find($request['program_id']);
+            $course->title = $request['title'];
+            $course->program()->associate($program);
+            $course->save();
 
             return "success";
 

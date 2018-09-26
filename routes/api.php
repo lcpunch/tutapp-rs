@@ -27,5 +27,12 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('programs/{id}', 'API\ProgramController@find');
     Route::post('programs/update', 'API\ProgramController@update');
     Route::post('programs/save', 'API\ProgramController@store');
+
+    // Course
+    Route::delete('programs/{id}', 'API\ProgramController@delete');
+    Route::get('programs', 'API\ProgramController@findAll');
+    Route::get('programs/{id}', 'API\ProgramController@find');
+    Route::post('programs/update', 'API\ProgramController@update');
+    Route::post('programs/save', 'API\ProgramController@store');
 });
 

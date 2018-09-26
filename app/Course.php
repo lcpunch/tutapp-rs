@@ -17,4 +17,24 @@ class Course extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function deleteRegister($id)
+    {
+        $course = Course::findOrFail($id);
+        if($course)
+            $course->delete();
+        else
+            return response()->json(error);
+        return response()->json(null);
+    }
+
+    public function returnRegister($id)
+    {
+        return Course::find($id);
+    }
+
+    public function returnAllRegisters($id)
+    {
+        return Course::all();
+    }
 }

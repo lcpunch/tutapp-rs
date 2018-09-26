@@ -10,33 +10,26 @@ use Illuminate\Http\Request;
 class ProgramController extends Controller
 {
 
-    public function delete($id)
+    public function delete($id, Program $program)
     {
-        $program = Program::findOrFail($id);
-        if($program)
-            $program->delete();
-        else
-            return response()->json(error);
-        return response()->json(null);
+        return $program->deleteRegister($id);
     }
 
-    public function findAll()
+    public function findAll(Program $program)
     {
-        return Program::all();
+        return $program->returnAllRegisters();
     }
 
-    public function find($id)
+    public function find($id, Program $program)
     {
-        return Program::find($id);
+        return $program->returnRegister($id);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Program $program)
     {
         try {
-            $program  = Program::find($request['id']);
-            $program->title = $request['title'];
-            $program->description = $request['description'];
-            $program->save();
+
+            $program->updateRegister($request);
 
         } catch (\Exception $e) {
             return "error";
@@ -68,7 +61,7 @@ class ProgramController extends Controller
 //            $user = JWTAuth::toUser($api_token);
 
 
-            $program->createProgram($request);
+            $program->createRegister($request);
 
             return "success";
 

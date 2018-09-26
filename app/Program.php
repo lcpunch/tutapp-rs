@@ -13,11 +13,38 @@ class Program extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function createProgram($data) {
-
+    public function createRegister($data)
+    {
         $this->title = $data['title'];
         $this->description = $data['description'];
         $this->save();
+    }
 
+    public function updateRegister($data)
+    {
+        $program  = Program::find($data['id']);
+        $program->title = $data['title'];
+        $program->description = $data['description'];
+        $program->save();
+    }
+
+    public function deleteRegister($id)
+    {
+        $program = Program::findOrFail($id);
+        if($program)
+            $program->delete();
+        else
+            return response()->json(error);
+        return response()->json(null);
+    }
+
+    public function returnRegister($id)
+    {
+        return Program::find($id);
+    }
+
+    public function returnAllRegisters($id)
+    {
+        return Program::all();
     }
 }
