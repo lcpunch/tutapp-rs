@@ -20,9 +20,9 @@ class Program extends Model
         $this->save();
     }
 
-    public function updateRegister($data)
+    public function updateRegister($id, $data)
     {
-        $program  = Program::find($data['id']);
+        $program  = Program::find($id);
         $program->title = $data['title'];
         $program->description = $data['description'];
         $program->save();
@@ -43,7 +43,7 @@ class Program extends Model
         return Program::find($id);
     }
 
-    public function returnAllRegisters($id)
+    public function returnAllRegisters()
     {
         return Program::all();
     }

@@ -25,11 +25,11 @@ class ProgramController extends Controller
         return $program->returnRegister($id);
     }
 
-    public function update(Request $request, Program $program)
+    public function update($id, Request $request, Program $program)
     {
         try {
 
-            $program->updateRegister($request);
+            $program->updateRegister($id ,$request);
 
         } catch (\Exception $e) {
             return "error";

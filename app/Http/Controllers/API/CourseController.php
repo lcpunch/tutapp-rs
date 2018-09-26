@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Course;
 use App\Http\Controllers\Controller;
 use App\Program;
 use http\Exception;
@@ -25,24 +26,31 @@ class CourseController extends Controller
         return $course->returnRegister($id);
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
         try {
 
             $program = Program::find($request['program_id']);
-            $course  = Course::find($request['id']);
-            $course->title = $request['title'];
-            $course->program()->associate($program);
-            $course->save();
+
+            if($program) {
+
+                $course = Course::find($id);
+                $course->title = $request['title'];
+                $course->program_id = $request['program_id'];
+                $course->save();
+
+            } else {
+                return response()->json(["error" => "You need to inform a valid program id"]);
+            }
 
         } catch (\Exception $e) {
-            return "error";
+            return response()->json(["error" => "Your data seems wrong."]);
         }
 
         return "success";
     }
 
-    public function store(Request $request, Program $course)
+    public function store(Request $request, Course $course)
     {
 //        $rules = array (
 //
@@ -66,9 +74,14 @@ class CourseController extends Controller
 
 
             $program = Program::find($request['program_id']);
-            $course->title = $request['title'];
-            $course->program()->associate($program);
-            $course->save();
+
+            if($program) {
+                $course->title = $request['title'];
+                $course->program_id = $request['program_id'];
+                $course->save();
+            } else {
+                return response()->json(["error" => "You need to inform a valid program id"]);
+            }
 
             return "success";
 

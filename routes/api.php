@@ -25,14 +25,16 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::delete('programs/{id}', 'API\ProgramController@delete');
     Route::get('programs', 'API\ProgramController@findAll');
     Route::get('programs/{id}', 'API\ProgramController@find');
-    Route::post('programs/update', 'API\ProgramController@update');
+    Route::post('programs/update/{id}', 'API\ProgramController@update');
     Route::post('programs/save', 'API\ProgramController@store');
 
     // Course
-    Route::delete('programs/{id}', 'API\ProgramController@delete');
-    Route::get('programs', 'API\ProgramController@findAll');
-    Route::get('programs/{id}', 'API\ProgramController@find');
-    Route::post('programs/update', 'API\ProgramController@update');
-    Route::post('programs/save', 'API\ProgramController@store');
+    Route::post('courses/save', 'API\CourseController@store');
+    Route::post('courses/update/{id}', 'API\CourseController@update');
+//    Route::delete('programs/{id}', 'API\ProgramController@delete');
+//    Route::get('programs', 'API\ProgramController@findAll');
+//    Route::get('programs/{id}', 'API\ProgramController@find');
+//    Route::post('programs/update', 'API\ProgramController@update');
+
 });
 
