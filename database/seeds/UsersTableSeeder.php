@@ -14,7 +14,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('users')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $password = Hash::make('1111');
 
