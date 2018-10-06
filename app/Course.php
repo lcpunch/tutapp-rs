@@ -18,6 +18,11 @@ class Course extends Model
         return $this->hasMany(User::class);
     }
 
+    public function tutors()
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function deleteRegister($id)
     {
         $course = Course::findOrFail($id);

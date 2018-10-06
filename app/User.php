@@ -50,6 +50,14 @@ class User extends Authenticatable
      */
     public function tutorats()
     {
-        return $this->belongsToMany(Tutorat::class);
+        return $this->hasMany(Tutorat::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function calendars()
+    {
+        return $this->hasMany(Calendar::class);
     }
 }

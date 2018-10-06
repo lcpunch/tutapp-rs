@@ -34,7 +34,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::delete('courses/{id}', 'API\CourseController@delete');
     Route::get('courses', 'API\CourseController@findAll');
     Route::get('courses/{id}', 'API\CourseController@find');
-//    Route::post('programs/update', 'API\ProgramController@update');
+
+    //Tutorat
+    Route::post('tutorat/save', 'API\TutoratController@store');
 
 });
 

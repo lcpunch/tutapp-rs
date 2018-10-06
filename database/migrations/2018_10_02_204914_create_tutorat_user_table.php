@@ -16,6 +16,7 @@ class CreateTutoratUserTable extends Migration
         Schema::create('tutorat_user', function (Blueprint $table) {
             $table->unsignedInteger('tutorat_id');
             $table->unsignedInteger('user_id');
+            $table->primary(['tutorat_id', 'user_id']);
         });
     }
 
