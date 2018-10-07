@@ -13,12 +13,13 @@ class CreateCalendarTable extends Migration
      */
     public function up()
     {
-        Schema::create('calendar', function (Blueprint $table) {
+        Schema::create('calendars', function (Blueprint $table) {
             $table->increments('id');
             $table->date('dtavailability');
             $table->time('hrstart');
-            $table->time('hrend');
+            $table->time('hrfinish');
             $table->unsignedInteger('user_id')->nullable();
+            $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users');
 
@@ -32,6 +33,6 @@ class CreateCalendarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calendar');
+        Schema::dropIfExists('calendars');
     }
 }

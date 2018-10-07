@@ -38,5 +38,12 @@ Route::post('register', 'API\UserController@register');
     //Tutorat
     Route::post('tutorat/save', 'API\TutoratController@store');
 
+    // Calendar
+    Route::post('calendar/save', 'API\CalendarController@store');
+    Route::post('calendar/update/{id}', 'API\CalendarController@update');
+    Route::delete('calendar/{id}', 'API\CalendarController@delete');
+    Route::get('calendar', 'API\CalendarController@findAll');
+    Route::get('calendar/{id}', 'API\CalendarController@find');
+
 //});
 

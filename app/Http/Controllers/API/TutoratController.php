@@ -13,11 +13,11 @@ class TutoratController extends Controller
         try{
             $tutorat->createRegister($request);
 
-            return "success";
+            return response()->json(['message' => 'success']);
 
         }catch(Exception $e){
 
-            return "error";
+            return response()->json(['error' => 'error: '.$e]);
 
         }
 

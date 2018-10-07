@@ -25,7 +25,5 @@ class Tutorat extends Model
         $this->tutor_id = $data['tutor_id'];
 
         $this->save();
-
-        $this->users()->attach($this->tutorat_id);
     }
 }
