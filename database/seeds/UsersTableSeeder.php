@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         User::truncate();
         DB::table('course_tutor')->truncate();
+        DB::table('course_user')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $password = Hash::make('1111');
@@ -30,9 +31,10 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $courses = Course::all();
-        $users = User::all();
 
         factory(User::class, 200)->create();
+
+        $users = User::all();
 
         $users->each(function ($user) use ($courses) {
             $user->courses()->attach(

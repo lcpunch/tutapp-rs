@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\Tutorat;
 use Illuminate\Http\Request;
 
 class TutoratController extends Controller
 {
-
-    public function store(Request $request, Calendar $calendar)
+    public function store(Request $request, Tutorat $tutorat)
     {
         try{
-            $calendar->createRegister($request);
+            $tutorat->createRegister($request);
 
             return "success";
 

@@ -14,16 +14,16 @@ class CreateTutoratsTable extends Migration
     public function up()
     {
         Schema::create('tutorats', function (Blueprint $table) {
-            $table->unsignedInteger('tutorat_id')->unsigned()->index();
-            $table->unsignedInteger('user_id')->unsigned()->index();
+            $table->increments('id');
+            $table->unsignedInteger('student_id')->unsigned()->index();
+            $table->unsignedInteger('tutor_id')->unsigned()->index();
             $table->time('hrstart');
             $table->time('hrfinish');
             $table->date('dtexecution');
-            $table->primary(['tutorat_id', 'user_id']);
-            $table->foreign('user_id')
+            $table->foreign('student_id')
                 ->references('id')->on('users');
-            $table->foreign('tutorat_id')
-                ->references('tutorat_id')->on('tutorat_user');
+            $table->foreign('tutor_id')
+                ->references('id')->on('users');
             $table->timestamps();
         });
     }

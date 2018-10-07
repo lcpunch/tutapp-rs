@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tutorat extends Model
 {
-    protected $fillable = ['user_id', 'hrstart', 'hrfinish', 'dtexecution'];
+    protected $fillable = ['student_id', 'tutor_id', 'hrstart', 'hrfinish', 'dtexecution'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -18,10 +18,12 @@ class Tutorat extends Model
 
     public function createRegister($data)
     {
-        $this->dtavailability = $data['dtexecution'];
+        $this->dtexecution = $data['dtexecution'];
         $this->hrstart = $data['hrstart'];
-        $this->hrend = $data['hrfinish'];
-        $this->user_id = $data['user_id'];
+        $this->hrfinish = $data['hrfinish'];
+        $this->student_id = $data['student_id'];
+        $this->tutor_id = $data['tutor_id'];
+
         $this->save();
 
         $this->users()->attach($this->tutorat_id);
