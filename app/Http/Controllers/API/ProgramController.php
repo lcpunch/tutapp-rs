@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Course;
 use App\Http\Controllers\Controller;
 use App\Program;
 use http\Exception;
@@ -32,42 +33,27 @@ class ProgramController extends Controller
             $program->updateRegister($id ,$request);
 
         } catch (\Exception $e) {
-            return "error";
+            return response()->json(["error" => "can't update :".$id]);
         }
 
-        return "success";
+        return response()->json(["success" => "updated :".$id]);
+    }
+
+    public function listCoursesByProgram($id)
+    {
+        return Course::where('program_id', '=' , $id)->get();
     }
 
     public function store(Request $request, Program $program)
     {
-//        $rules = array (
-//
-//            'api_token' => 'required',
-//            'title' => 'required'
-//        );
-
-//        $validator = Validator::make($request->all(), $rules);
-//
-//        if ($validator-> fails()){
-//
-//            return $this->respondValidationError('Fields Validation Failed.', $validator->errors());
-//
-//        }
-
-//        $api_token = $request['api_token'];
-
         try{
-
-//            $user = JWTAuth::toUser($api_token);
-
-
             $program->createRegister($request);
 
-            return "success";
+            return response()->json(["success" => "stored :".$request]);
 
         }catch(Exception $e){
 
-            return "error";
+            return response()->json(["error" => "can't store :".$request]);
 
         }
 
