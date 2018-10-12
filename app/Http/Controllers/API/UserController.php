@@ -23,9 +23,8 @@ class UserController extends Controller
             try {
                 $success['token'] = $user->createToken('tutapp-rs')->accessToken;
 
-                //TODO: retornar o id aqui
 
-                return response()->json(['success' => $success], $this->successStatus);
+                return response()->json(['success' => $success, "id" => $user->id], $this->successStatus);
             } catch (\Exception $e) {
                 return response()->json(['error'=>'Error: '.$e]);
             }
