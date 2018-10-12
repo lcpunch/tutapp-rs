@@ -27,7 +27,8 @@ Route::post('register', 'API\UserController@register');
     Route::get('programs/{id}', 'API\ProgramController@find');
     Route::post('programs/update/{id}', 'API\ProgramController@update');
     Route::post('programs/save', 'API\ProgramController@store');
-    Route::get('programs/{id}/courses', 'API\ProgramController@listCoursesByProgram');
+
+    Route::get('userscourses/{id}', 'API\ProgramController@listProgramByUser');
 
     // Course
     Route::post('courses/save', 'API\CourseController@store');

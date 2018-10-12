@@ -44,6 +44,16 @@ class ProgramController extends Controller
         return Course::where('program_id', '=' , $id)->get();
     }
 
+    public function listProgramByUser($id)
+    {
+        return Course::join('course_user', 'course_user.course_id', '=', 'courses.id')
+            ->join('programs', 'programs.id', '=', 'courses.program_id')
+            ->where('course_user.user_id', '=', $id)
+            ->select('programs.title', 'programs.description', 'programs.id')
+            ->getQuery()
+            ->get();
+    }
+
     public function store(Request $request, Program $program)
     {
         try{
