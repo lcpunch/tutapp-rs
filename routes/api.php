@@ -19,7 +19,7 @@ Route::post('register', 'API\UserController@register');
 
 //Route::group(['middleware' => 'auth:api'], function() {
 
-    Route::post('details', 'API\UserController@details');
+    Route::post('details/{id}', 'API\UserController@details');
 
     // Program
     Route::delete('programs/{id}', 'API\ProgramController@delete');
@@ -40,6 +40,7 @@ Route::post('register', 'API\UserController@register');
 
     //Tutorat
     Route::post('tutorat/save', 'API\TutoratController@store');
+    Route::get('courses/{id}/tutors', 'API\TutoratController@listTutorsByCourse');
 
     // Calendar
     Route::post('calendar/save', 'API\CalendarController@store');

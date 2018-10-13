@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Course;
 use App\Http\Controllers\Controller;
 use App\Tutorat;
 use Illuminate\Http\Request;
@@ -21,5 +22,15 @@ class TutoratController extends Controller
 
         }
 
+    }
+
+    public function listTutorsByCourse($id)
+    {
+        return Course::join('course_tutor', 'course_tutor.course_id', '=', 'courses.id')
+            ->join('users', 'users.id', '=', 'course_tutor.user_id')
+            ->where('course_tutor.course_id', '=', $id)
+            ->select('users.name', 'users.email', 'users.id')
+            ->getQuery()
+            ->get();
     }
 }
