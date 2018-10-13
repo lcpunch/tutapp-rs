@@ -58,4 +58,13 @@ class CalendarController extends Controller
     {
         return $calendar->returnRegister($id);
     }
+
+    public function listCalendarByUser($id)
+    {
+        return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
+            ->where('users.id', '=', $id)
+            ->select('calendars.dtavailability')
+            ->getQuery()
+            ->get();
+    }
 }
