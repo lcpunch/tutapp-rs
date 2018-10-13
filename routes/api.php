@@ -29,6 +29,7 @@ Route::post('register', 'API\UserController@register');
     Route::post('programs/save', 'API\ProgramController@store');
 
     Route::get('userprograms/{id}', 'API\ProgramController@listProgramByUser');
+    Route::get('programs/{id}/courses', 'API\ProgramController@listCoursesByProgram');
 
     // Course
     Route::post('courses/save', 'API\CourseController@store');
