@@ -63,7 +63,7 @@ class CalendarController extends Controller
     {
         return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
             ->where('users.id', '=', $id)
-            ->select('calendars.dtavailability', 'calendars.id', 'calendars.user_id')
+            ->select('calendars.hrstart', 'calendars.dtavailability', 'calendars.user_id', 'calendars.id', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
     }
