@@ -42,7 +42,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'scenographic-photog.000webhostapp.com'),
-            'port' => env('DB_PORT', '3306'),
+            'port' => env('DB_PORT', '80'),
             'database' => env('DB_DATABASE', 'id7474329_tutapp'),
             'username' => env('DB_USERNAME', 'id7474329_grasset'),
             'password' => env('DB_PASSWORD', 'grasset2018'),
