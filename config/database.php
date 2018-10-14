@@ -41,10 +41,10 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'scenographic-photog.000webhostapp.com'),
-            'port' => env('DB_PORT', '80'),
-            'database' => env('DB_DATABASE', 'id7474329_tutapp'),
-            'username' => env('DB_USERNAME', 'id7474329_grasset'),
+            'host' => env('DB_HOST', 'db4free.net'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'tutapp'),
+            'username' => env('DB_USERNAME', 'grasset'),
             'password' => env('DB_PASSWORD', 'grasset2018'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
