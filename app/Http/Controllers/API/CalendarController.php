@@ -73,7 +73,6 @@ class CalendarController extends Controller
         return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
             ->where('users.id', '=', $id)
             ->where('calendars.dtavailability', '=', $date)
-            ->whereNotIn('id', [1, 2, 3])
             ->select('calendars.hrstart', 'calendars.dtavailability', 'calendars.user_id', 'calendars.id', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
