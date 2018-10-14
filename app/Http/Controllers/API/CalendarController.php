@@ -63,7 +63,17 @@ class CalendarController extends Controller
     {
         return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
             ->where('users.id', '=', $id)
-            ->select('calendars.dtavailability', 'calendars.id')
+            ->select('calendars.dtavailability', 'calendars.id', 'calendars.user_id')
+            ->getQuery()
+            ->get();
+    }
+
+    public function listHoursByDate($id, $date)
+    {
+        return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
+            ->where('users.id', '=', $id)
+            ->where('calendars.dtavailability', '=', $date)
+            ->select('calendars.hrstart', 'calendars.id', 'calendars.hrfinish')
             ->getQuery()
             ->get();
     }
