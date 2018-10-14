@@ -17,13 +17,14 @@ class CreateTutoratsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('student_id')->unsigned()->index();
             $table->unsignedInteger('tutor_id')->unsigned()->index();
-            $table->time('hrstart');
-            $table->time('hrfinish');
-            $table->date('dtexecution');
+            $table->unsignedInteger('id_calendar')->unsigned()->index();
+            $table->unsignedInteger('status')->unsigned();
             $table->foreign('student_id')
                 ->references('id')->on('users');
             $table->foreign('tutor_id')
                 ->references('id')->on('users');
+            $table->foreign('id_calendar')
+                ->references('id')->on('calendars');
             $table->timestamps();
         });
     }

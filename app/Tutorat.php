@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tutorat extends Model
 {
-    protected $fillable = ['student_id', 'tutor_id', 'hrstart', 'hrfinish', 'dtexecution'];
+    protected $fillable = ['student_id', 'tutor_id', 'id_calendar'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
