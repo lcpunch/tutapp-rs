@@ -42,6 +42,7 @@ Route::post('register', 'API\UserController@register');
     Route::post('tutorat/save', 'API\TutoratController@store');
     Route::get('courses/{id}/tutors', 'API\TutoratController@listTutorsByCourse');
     Route::get('tutorat/student/{id}', 'API\TutoratController@listTutoratsByStudent');
+    Route::post('tutorat/status/{id}', 'API\TutoratController@updateStatus');
 
     // Calendar
     Route::post('calendar/save', 'API\CalendarController@store');

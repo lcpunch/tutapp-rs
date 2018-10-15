@@ -25,4 +25,11 @@ class Tutorat extends Model
 
         $this->save();
     }
+
+    public function updateStatus($id)
+    {
+        $tutorat  = Tutorat::find($id);
+        $tutorat->status = 1;
+        $tutorat->save();
+    }
 }

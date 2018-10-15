@@ -38,7 +38,18 @@ class TutoratController extends Controller
         return Tutorat::where('tutorats.student_id', '=', $id)
             ->join('users', 'users.id', '=', 'tutorats.tutor_id')
             ->join('calendars', 'calendars.id', '=', 'tutorats.id_calendar')
+            ->select('tutorats.id', 'calendars.dtavailability', 'calendars.hrstart', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
+    }
+
+    public function updateStatus($id, Tutorat $tutorat)
+    {
+        try{
+            $tutorat->updateStatus($id);
+            return response()->json(['message' => 'success']);
+        }catch(Exception $e){
+            return response()->json(['error' => 'error: '.$e]);
+        }
     }
 }
