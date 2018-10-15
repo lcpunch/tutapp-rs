@@ -21,7 +21,6 @@ class TutoratController extends Controller
             return response()->json(['error' => 'error: '.$e]);
 
         }
-
     }
 
     public function listTutorsByCourse($id)
@@ -30,6 +29,15 @@ class TutoratController extends Controller
             ->join('users', 'users.id', '=', 'course_tutor.user_id')
             ->where('course_tutor.course_id', '=', $id)
             ->select('users.name', 'users.email', 'users.id')
+            ->getQuery()
+            ->get();
+    }
+
+    public function listTutoratsByStudent($id)
+    {
+        return Tutorat::where('tutorats.student_id', '=', $id)
+            ->join('users', 'users.id', '=', 'tutorats.tutor_id')
+            ->join('calendars', 'calendars.id', '=', 'tutorats.id_calendar')
             ->getQuery()
             ->get();
     }
