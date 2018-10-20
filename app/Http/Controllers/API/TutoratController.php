@@ -38,7 +38,7 @@ class TutoratController extends Controller
         return Tutorat::where('tutorats.student_id', '=', $id)
             ->join('users', 'users.id', '=', 'tutorats.tutor_id')
             ->join('calendars', 'calendars.id', '=', 'tutorats.id_calendar')
-            ->select('tutorats.id', 'calendars.dtavailability', 'calendars.hrstart', 'calendars.hrfinish', 'users.name')
+            ->select('tutorats.id', 'tutorats.status', 'calendars.dtavailability', 'calendars.hrstart', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
     }

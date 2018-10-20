@@ -59,14 +59,18 @@ class CalendarController extends Controller
         return $calendar->returnRegister($id);
     }
 
-    public function listCalendarByUser($id)
+    public function listCalendarByUser($id, $id_student)
     {
         return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
             ->where('users.id', '=', $id)
-            ->whereNotIn('calendars.id', function($q){
-                $q->select('id_calendar')->from('tutorats');
+            ->whereNotIn('calendars.id', function($q) use ($id_student) {
+                $q->select('id_calendar')
+                    ->from('tutorats')
+                    ->where('tutorats.student_id', '=', $id_student);
             })
-            ->select('calendars.hrstart', 'calendars.dtavailability', 'calendars.user_id', 'calendars.id', 'calendars.hrfinish', 'users.name')
+            ->select(\DB::raw('(SELECT 1 
+            FROM tutorats t 
+            WHERE t.id_calendar=calendars.id) AS num_tutorats'), 'calendars.hrstart', 'calendars.dtavailability', 'calendars.user_id', 'calendars.id', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
     }
