@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use App\Program;
 
 
 class UserController extends Controller
@@ -70,5 +71,62 @@ class UserController extends Controller
 //        $user = Auth::user();
 //        return response()->json(['success' => $user], $this-> successStatus);
         return User::find($id);
+    }
+
+    public function findAll(User $user)
+    {
+        return $user->returnAllRegisters();
+    }
+
+    public function find($id, User $user)
+    {
+        return $user->returnRegister($id);
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+          $user = User::find($id);
+          $user->name = $request->get('name');
+          $user->email = $request->get('email');
+          //$course->program_id = $request['program_id'];
+          $user->role = (int)$request->get('role');
+          $user->save();
+        } catch (\Exception $e) {
+            return response()->json(["error" => $e]);
+        }
+
+        return "success";
+    }
+
+    public function store(Request $request, User $user)
+    {
+        try{
+            //$program = Program::find($request['program_id']);
+
+            //if($program) {
+                $user->name = $request['name'];
+                $user->email = $request['email'];
+                $user->role = $request['role'];
+                $user->password = $request['password'];
+                //$user->program_id = 3;
+                $user->save();
+            //} else {
+            //    return response()->json(["error" => "You need to inform a valid program id"]);
+            //}
+
+            return "success";
+
+        }catch(Exception $e){
+
+            return "error";
+
+        }
+
+    }
+
+    public function delete($id, User $user)
+    {
+        return $user->deleteRegister($id);
     }
 }

@@ -60,4 +60,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Calendar::class);
     }
+
+    public function returnAllRegisters()
+    {
+        return User::all();
+    }
+
+    public function returnRegister($id)
+    {
+        return User::find($id);
+    }
+
+    public function deleteRegister($id)
+    {
+        $user = User::findOrFail($id);
+        if($user && $id != 1)
+            $user->delete();
+        else
+            return response()->json(error);
+        return response()->json(null);
+    }
+
 }

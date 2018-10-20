@@ -51,8 +51,11 @@ Route::post('register', 'API\UserController@register');
     Route::get('calendar', 'API\CalendarController@findAll');
     Route::get('calendar/{id}', 'API\CalendarController@find');
     Route::get('calendar/{id}/tutor/{id_student}', 'API\CalendarController@listCalendarByUser');
-    Route::get('calendar/{id}/tutor', 'API\CalendarController@listCalendarByTutor');
     Route::get('calendar/{id}/tutor/{date}', 'API\CalendarController@listHoursByDate');
 
+    Route::get('users', 'API\UserController@findAll');
+    Route::get('users/{id}', 'API\UserController@find');
+    Route::post('users/update/{id}', 'API\UserController@update');
+    Route::post('users/save', 'API\UserController@store');
+    Route::delete('users/{id}', 'API\UserController@delete');
 //});
-
