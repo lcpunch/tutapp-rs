@@ -54,5 +54,8 @@ Route::post('register', 'API\UserController@register');
     Route::get('calendar/{id}/tutor', 'API\CalendarController@listCalendarByTutor');
     Route::get('calendar/{id}/tutor/{date}', 'API\CalendarController@listHoursByDate');
 
+
+    Route::post('/send', 'EmailController@send');
+
 //});
 

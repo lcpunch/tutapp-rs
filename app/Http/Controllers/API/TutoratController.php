@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Course;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Tutorat;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,6 @@ class TutoratController extends Controller
     {
         try{
             $tutorat->createRegister($request);
-
             return response()->json(['message' => 'success']);
 
         }catch(Exception $e){
