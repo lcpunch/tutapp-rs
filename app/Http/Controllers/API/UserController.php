@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\API;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -23,8 +24,11 @@ class UserController extends Controller
             try {
                 $success['token'] = $user->createToken('tutapp-rs')->accessToken;
 
-
-                return response()->json(['success' => $success, "id" => $user->id], $this->successStatus);
+                return response()->json([
+                    'success' => $success,
+                    "id" => $user->id,
+                    "role" => $user->role
+                ], $this->successStatus);
             } catch (\Exception $e) {
                 return response()->json(['error'=>'Error: '.$e]);
             }

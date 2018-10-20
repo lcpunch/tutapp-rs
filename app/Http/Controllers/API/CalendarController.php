@@ -75,6 +75,15 @@ class CalendarController extends Controller
             ->get();
     }
 
+    public function listCalendarByTutor($id)
+    {
+        return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
+            ->where('users.id', '=', $id)
+            ->select('calendars.hrstart', 'calendars.dtavailability', 'calendars.user_id', 'calendars.id', 'calendars.hrfinish', 'users.name')
+            ->getQuery()
+            ->get();
+    }
+
     public function listHoursByDate($id, $date)
     {
         return Calendar::join('users', 'users.id', '=', 'calendars.user_id')
