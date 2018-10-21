@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Program;
 
-
 class UserController extends Controller
 {
     public $successStatus = 200;
@@ -120,6 +119,29 @@ class UserController extends Controller
         }catch(Exception $e){
           return "error";
         }
+    }
+
+    public function import(Request $request)
+    {
+      $users = $request->get('file');
+      array_shift($users);
+
+      foreach ($users as $user)
+      {
+        $userModel           = new User();
+        $userModel->name     = $user[1];
+        $userModel->role     = 3;
+        $userModel->password = bcrypt('secret');
+        $userModel->email    = $user[0];
+
+        $program = Program::find($userModel[2]);
+        if($program) {
+          $userModel->program_id = $program->id;
+        }
+
+        $userModel->registration_number = $user[0];
+        $userModel->save();
+      }
     }
 
     public function delete($id, User $user)

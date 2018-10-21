@@ -58,4 +58,5 @@ Route::post('register', 'API\UserController@register');
     Route::post('users/update/{id}', 'API\UserController@update');
     Route::post('users/save', 'API\UserController@store');
     Route::delete('users/{id}', 'API\UserController@delete');
+    Route::post('users/import', 'API\UserController@import');
 //});
