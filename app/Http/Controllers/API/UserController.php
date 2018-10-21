@@ -27,6 +27,8 @@ class UserController extends Controller
 
                 return response()->json([
                     'success' => $success,
+//        $user = Auth::user();
+//        return response()->json(['success' => $user], $this-> successStatus);
                     "id" => $user->id,
                     "role" => $user->role
                 ], $this->successStatus);
@@ -68,8 +70,6 @@ class UserController extends Controller
      */
     public function details($id)
     {
-//        $user = Auth::user();
-//        return response()->json(['success' => $user], $this-> successStatus);
         return User::find($id);
     }
 
@@ -87,10 +87,11 @@ class UserController extends Controller
     {
         try {
           $user = User::find($id);
-          $user->name = $request->get('name');
-          $user->email = $request->get('email');
-          //$course->program_id = $request['program_id'];
-          $user->role = (int)$request->get('role');
+          $user->name                = $request->get('name');
+          $user->email               = $request->get('email');
+          $user->program_id          =  $request->get('program_id');
+          $user->registration_number =  $request->get('registration_number');
+          $user->role                = (int)$request->get('role');
           $user->save();
         } catch (\Exception $e) {
             return response()->json(["error" => $e]);
@@ -102,27 +103,18 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         try{
-            //$program = Program::find($request['program_id']);
+          $user->name                = $request['name'];
+          $user->email               = $request['email'];
+          $user->role                = $request['role'];
+          $user->password            = $request['password'];
+          $user->program_id          = $request['program_id'];
+          $user->registration_number = $request['registration_number'];
+          $user->save();
 
-            //if($program) {
-                $user->name = $request['name'];
-                $user->email = $request['email'];
-                $user->role = $request['role'];
-                $user->password = $request['password'];
-                //$user->program_id = 3;
-                $user->save();
-            //} else {
-            //    return response()->json(["error" => "You need to inform a valid program id"]);
-            //}
-
-            return "success";
-
+          return "success";
         }catch(Exception $e){
-
-            return "error";
-
+          return "error";
         }
-
     }
 
     public function delete($id, User $user)
