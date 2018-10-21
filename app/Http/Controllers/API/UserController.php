@@ -121,7 +121,7 @@ class UserController extends Controller
         }
     }
 
-    public function import(Request $request)
+    public function import(Request $request, Program $programModel)
     {
       $users = $request->get('file');
       array_shift($users);
@@ -134,7 +134,7 @@ class UserController extends Controller
         $userModel->password = bcrypt('secret');
         $userModel->email    = $user[0];
 
-        $program = Program::find($userModel[2]);
+        $program = $programModel->returnRegirterByTitle($user[2]);
         if($program) {
           $userModel->program_id = $program->id;
         }
