@@ -43,6 +43,7 @@ Route::post('register', 'API\UserController@register');
     Route::get('courses/{id}/tutors', 'API\TutoratController@listTutorsByCourse');
     Route::get('tutorat/student/{id}', 'API\TutoratController@listTutoratsByStudent');
     Route::post('tutorat/status/{id}', 'API\TutoratController@updateStatus');
+    Route::get('tutorat/{id}/{date}', 'API\TutoratController@listAllTutoratsByTutor');
 
     // Calendar
     Route::post('calendar/save', 'API\CalendarController@store');
@@ -54,8 +55,9 @@ Route::post('register', 'API\UserController@register');
     Route::get('calendar/{id}/tutor', 'API\CalendarController@listCalendarByTutor');
     Route::get('calendar/{id}/tutor/{date}', 'API\CalendarController@listHoursByDate');
 
-
+    // Email
     Route::post('/send', 'EmailController@send');
+    
 
 //});
 

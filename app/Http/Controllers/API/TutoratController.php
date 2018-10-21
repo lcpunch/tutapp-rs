@@ -43,6 +43,22 @@ class TutoratController extends Controller
             ->get();
     }
 
+    public function listAllTutoratsByTutor($id, $date)
+    {
+        return Tutorat::where('tutorats.tutor_id', '=', $id)
+            ->join('users', 'users.id', '=', 'tutorats.tutor_id')
+            ->join('calendars', 'calendars.id', '=', 'tutorats.id_calendar')
+            ->where('tutorats.status','=','1')
+            ->where('calendars.dtavailability', '>=', $date.'-01')
+            ->where('calendars.dtavailability', '<=', date("Y-m-t", strtotime($date.'-01')))
+            ->where(\DB::raw('(SELECT COUNT(id_calendar) 
+            FROM tutorats t 
+            WHERE t.id_calendar=calendars.id)'), '>=', 2)
+            ->select('tutorats.id', 'tutorats.status', 'tutorats.id_calendar', 'calendars.dtavailability', 'calendars.hrstart', 'calendars.hrfinish', 'users.name')
+            ->getQuery()
+            ->get();
+    } 
+
     public function updateStatus($id, Tutorat $tutorat)
     {
         try{
