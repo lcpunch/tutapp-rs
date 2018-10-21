@@ -92,6 +92,11 @@ class UserController extends Controller
           $user->program_id          =  $request->get('program_id');
           $user->registration_number =  $request->get('registration_number');
           $user->role                = (int)$request->get('role');
+
+          if (!empty($request->get('password'))) {
+            $user->password = bcrypt($request->get('password'));
+          }
+
           $user->save();
         } catch (\Exception $e) {
             return response()->json(["error" => $e]);
