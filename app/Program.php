@@ -47,4 +47,9 @@ class Program extends Model
     {
         return Program::all();
     }
+
+    public function returnRegirterByTitle($title)
+    {
+        return Program::where('title', 'LIKE', $title)->first();
+    }
 }

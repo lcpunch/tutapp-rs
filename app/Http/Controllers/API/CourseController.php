@@ -20,7 +20,7 @@ class CourseController extends Controller
         return $course->returnAllRegisters();
     }
 
-    public function find($id, Program $course)
+    public function find($id, Course $course)
     {
         return $course->returnRegister($id);
     }

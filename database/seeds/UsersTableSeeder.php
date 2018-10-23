@@ -29,6 +29,7 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'password' => $password,
             'remember_token' => str_random(10),
+            'registration_number' => 'admin1111',            
         ]);
 
         $courses = Course::all();

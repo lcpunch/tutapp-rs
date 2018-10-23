@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use App\Program;
 
 class UserController extends Controller
 {
@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function login() {
 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if(Auth::attempt(['registration_number' => request('email'), 'password' => request('password')])) {
 
             $user = Auth::user();
             try {
@@ -26,6 +26,8 @@ class UserController extends Controller
 
                 return response()->json([
                     'success' => $success,
+//        $user = Auth::user();
+//        return response()->json(['success' => $user], $this-> successStatus);
                     "id" => $user->id,
                     "role" => $user->role
                 ], $this->successStatus);
@@ -67,8 +69,83 @@ class UserController extends Controller
      */
     public function details($id)
     {
-//        $user = Auth::user();
-//        return response()->json(['success' => $user], $this-> successStatus);
         return User::find($id);
+    }
+
+    public function findAll(User $user)
+    {
+        return $user->returnAllRegisters();
+    }
+
+    public function find($id, User $user)
+    {
+        return $user->returnRegister($id);
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+          $user = User::find($id);
+          $user->name                = $request->get('name');
+          $user->email               = $request->get('email');
+          $user->program_id          =  $request->get('program_id');
+          $user->registration_number =  $request->get('registration_number');
+          $user->role                = (int)$request->get('role');
+
+          if (!empty($request->get('password'))) {
+            $user->password = bcrypt($request->get('password'));
+          }
+
+          $user->save();
+        } catch (\Exception $e) {
+            return response()->json(["error" => $e]);
+        }
+
+        return "success";
+    }
+
+    public function store(Request $request, User $user)
+    {
+        try{
+          $user->name                = $request['name'];
+          $user->email               = $request['email'];
+          $user->role                = $request['role'];
+          $user->password            = $request['password'];
+          $user->program_id          = $request['program_id'];
+          $user->registration_number = $request['registration_number'];
+          $user->save();
+
+          return "success";
+        }catch(Exception $e){
+          return "error";
+        }
+    }
+
+    public function import(Request $request, Program $programModel)
+    {
+      $users = $request->get('file');
+      array_shift($users);
+
+      foreach ($users as $user)
+      {
+        $userModel           = new User();
+        $userModel->name     = $user[1];
+        $userModel->role     = 3;
+        $userModel->password = bcrypt('secret');
+        $userModel->email    = $user[0];
+
+        $program = $programModel->returnRegirterByTitle($user[2]);
+        if($program) {
+          $userModel->program_id = $program->id;
+        }
+
+        $userModel->registration_number = $user[0];
+        $userModel->save();
+      }
+    }
+
+    public function delete($id, User $user)
+    {
+        return $user->deleteRegister($id);
     }
 }
