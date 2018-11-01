@@ -21,6 +21,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
+header('Access-Control-Allow-Origin: *');  
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 require __DIR__.'/../vendor/autoload.php';
 
 /*
@@ -59,5 +61,3 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-header('Access-Control-Allow-Origin: *');  
-header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');

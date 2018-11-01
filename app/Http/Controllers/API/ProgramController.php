@@ -23,10 +23,7 @@ class ProgramController extends Controller
 
     public function find($id, Program $program)
     {
-        if($id > -1)
-            return $program->returnRegister($id);
-        else
-            return $program->returnAllRegisters();
+        return $program->returnRegister($id);
     }
 
     public function update($id, Request $request, Program $program)
@@ -47,13 +44,17 @@ class ProgramController extends Controller
         return Course::where('program_id', '=' , $id)->get();
     }
 
-    public function listProgramByUser($id)
+    public function listProgramByUser($id, Program $program)
     {
-        return Program::join('users', 'users.program_id', '=', 'programs.id')
+        if($id != '-1') {
+            return "1";
+            return Program::join('users', 'users.program_id', '=', 'programs.id')
             ->where('users.id', '=', $id)
             ->select('programs.title', 'programs.description', 'programs.id')
             ->getQuery()
             ->get();
+        }
+        return $program->returnAllRegisters();
     }
 
     public function store(Request $request, Program $program)
