@@ -77,7 +77,10 @@ class UserController extends Controller
 
     public function find($id, User $user)
     {
-        return $user->returnRegister($id);
+        if($id != '-1') {
+            return $user->returnRegister($id);
+        } 
+        return $user->returnAllRegisters();
     }
 
     public function update($id, Request $request)
