@@ -35,7 +35,7 @@ Route::post('register', 'API\UserController@register');
     Route::post('courses/save', 'API\CourseController@store');
     Route::post('courses/update/{id}', 'API\CourseController@update');
     Route::delete('courses/{id}', 'API\CourseController@delete');
-    Route::get('courses/c', 'API\CourseController@findAll');
+    Route::get('courses/', 'API\CourseController@findAll');
     Route::get('courses/{id}', 'API\CourseController@find');
 
     //Tutorat
@@ -46,7 +46,6 @@ Route::post('register', 'API\UserController@register');
     Route::get('tutorat/{id}/{date}', 'API\TutoratController@listAllTutoratsByTutor');
 
     Route::post('tutorat/addtutor/{course}/{tutor}', 'API\TutoratController@addTutor');
-
 
     // Calendar
     Route::post('calendar/save', 'API\CalendarController@store');

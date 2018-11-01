@@ -22,7 +22,10 @@ class CourseController extends Controller
 
     public function find($id, Course $course)
     {
-        return $course->returnRegister($id);
+        if($i != '-1') {
+            return $course->returnRegister($id);
+        }
+        return $course->returnAllRegisters();
     }
 
     public function update($id, Request $request)
