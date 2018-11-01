@@ -35,7 +35,7 @@ Route::post('register', 'API\UserController@register');
     Route::post('courses/save', 'API\CourseController@store');
     Route::post('courses/update/{id}', 'API\CourseController@update');
     Route::delete('courses/{id}', 'API\CourseController@delete');
-    Route::get('courses', 'API\CourseController@findAll');
+    Route::get('courses/c', 'API\CourseController@findAll');
     Route::get('courses/{id}', 'API\CourseController@find');
 
     //Tutorat
