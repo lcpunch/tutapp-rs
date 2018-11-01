@@ -13,7 +13,7 @@ class CreateCourseTutorTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_tutor', function (Blueprint $table) {
+        Schema::create('course_tutors', function (Blueprint $table) {
             $table->unsignedInteger('course_id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')
@@ -22,6 +22,7 @@ class CreateCourseTutorTable extends Migration
             $table->foreign('course_id')
                 ->references('id')->on('courses')
                 ->onDelete('cascade');;
+            $table->timestamps();
         });
     }
 
@@ -32,6 +33,6 @@ class CreateCourseTutorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tutor');
+        Schema::dropIfExists('course_tutors');
     }
 }

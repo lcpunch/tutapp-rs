@@ -6,6 +6,7 @@ use App\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
 use App\Tutorat;
+use App\CourseTutor;
 use Illuminate\Http\Request;
 
 class TutoratController extends Controller
@@ -25,9 +26,9 @@ class TutoratController extends Controller
 
     public function listTutorsByCourse($id)
     {
-        return Course::join('course_tutor', 'course_tutor.course_id', '=', 'courses.id')
-            ->join('users', 'users.id', '=', 'course_tutor.user_id')
-            ->where('course_tutor.course_id', '=', $id)
+        return Course::join('course_tutors', 'course_tutors.course_id', '=', 'courses.id')
+            ->join('users', 'users.id', '=', 'course_tutors.user_id')
+            ->where('course_tutors.course_id', '=', $id)
             ->select('users.name', 'users.email', 'users.id')
             ->getQuery()
             ->get();
@@ -57,6 +58,14 @@ class TutoratController extends Controller
             ->select('tutorats.id', 'tutorats.status', 'tutorats.id_calendar', 'calendars.dtavailability', 'calendars.hrstart', 'calendars.hrfinish', 'users.name')
             ->getQuery()
             ->get();
+    } 
+
+    public function addTutor($course, $tutor)
+    {
+        $tutor_course = new CourseTutor();
+        $tutor_course->course_id = $course;
+        $tutor_course->user_id = $tutor;
+        $tutor_course->save();
     } 
 
     public function updateStatus($id, Tutorat $tutorat)

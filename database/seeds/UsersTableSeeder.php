@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         User::truncate();
-        DB::table('course_tutor')->truncate();
+        DB::table('course_tutors')->truncate();
         DB::table('course_user')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'password' => $password,
             'remember_token' => str_random(10),
-            'registration_number' => 'admin1111',            
+            'registration_number' => '1',            
         ]);
 
         // $courses = Course::all();
