@@ -47,7 +47,6 @@ class ProgramController extends Controller
     public function listProgramByUser($id, Program $program)
     {
         if($id != '-1') {
-            return "1";
             return Program::join('users', 'users.program_id', '=', 'programs.id')
             ->where('users.id', '=', $id)
             ->select('programs.title', 'programs.description', 'programs.id')
