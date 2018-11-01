@@ -23,7 +23,10 @@ class ProgramController extends Controller
 
     public function find($id, Program $program)
     {
-        return $program->returnRegister($id);
+        if($id > -1)
+            return $program->returnRegister($id);
+        else
+            return $program->returnAllRegisters();
     }
 
     public function update($id, Request $request, Program $program)
